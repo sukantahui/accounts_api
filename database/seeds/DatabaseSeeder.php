@@ -7,6 +7,7 @@ use App\Model\LedgerType;
 use App\Model\Ledger;
 use App\Model\Asset;
 use App\Model\Transaction;
+use App\Model\voucher;
 
 
 class DatabaseSeeder extends Seeder
@@ -57,6 +58,10 @@ class DatabaseSeeder extends Seeder
         //Assets
         Asset::create(['assets_name'=>'Cash','opening_balance'=>0]);
         Asset::create(['assets_name'=>'Bank','opening_balance'=>0]);
+
+        //Voucher
+        Voucher::create(['voucher_name'=>'Receipt']);
+        Voucher::create(['voucher_name'=>'Payment']);
 
     }
 }
