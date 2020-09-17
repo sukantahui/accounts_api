@@ -18,6 +18,7 @@ class CreateLedgersTable extends Migration
             $table->bigInteger('ledger_type_id')->unsigned();
             $table->foreign('ledger_type_id')->references('id')->on('ledger_types');
             $table->string('ledger_name');
+            $table->tinyInteger('inforce')->default(1);
             $table->timestamps();
         });
     }

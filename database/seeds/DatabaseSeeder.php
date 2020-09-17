@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
         PersonType::create(['person_type_name' => 'Karigarh']);
 
         // user
-        User::create(['person_name'=>'Vivekananda Ghsoh','mobile1'=>'9836444999','mobile2'=>'','email'=>'bangle312@gmail.com','password'=>"81dc9bdb52d04dc20036dbd8313ed055",'person_type_id'=>1]);
+        User::create(['person_name'=>'Arindam Biswas','mobile1'=>'9836444999','mobile2'=>'','email'=>'arindam','password'=>"81dc9bdb52d04dc20036dbd8313ed055",'person_type_id'=>1]);
         User::create(['person_name'=>'Abishek Basak','mobile1'=>'9836444451','mobile2'=>'','email'=>'bangle396@gmail.com','password'=>"81dc9bdb52d04dc20036dbd8313ed055",'person_type_id'=>7]);
 
         //Ledger_types
@@ -54,6 +54,9 @@ class DatabaseSeeder extends Seeder
         Ledger::create(['ledger_name'=>'Electricity','ledger_type_id'=>2]);
         Ledger::create(['ledger_name'=>'Municipal Tax','ledger_type_id'=>2]);
         Ledger::create(['ledger_name'=>'Misc. Expenditure','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Saraswati Puja Expenditure','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Biswakarma Puja Expenditure','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Others Puja Expenditure','ledger_type_id'=>2]);
 
         //Assets
         Asset::create(['assets_name'=>'Cash','opening_balance'=>0]);

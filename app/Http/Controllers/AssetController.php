@@ -14,7 +14,8 @@ class AssetController extends Controller
      */
     public function index()
     {
-        //
+        $assets=Asset::get();
+        return response()->json(['success'=>1,'data'=>$assets], 200,[],JSON_NUMERIC_CHECK);
     }
 
     /**

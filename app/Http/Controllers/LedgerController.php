@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Ledger;
+use App\Model\LedgerType;
 use Illuminate\Http\Request;
 
 class LedgerController extends Controller
@@ -12,72 +13,37 @@ class LedgerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function getIncomes()
     {
-        //
+        $incomes=LedgerType::find(1)->ledgers->where('inforce','=',1);
+        return response()->json(['success'=>1,'data'=>$incomes], 200,[],JSON_NUMERIC_CHECK);
+    }
+    public function getExpenditures()
+    {
+        $expenditures=LedgerType::find(2)->ledgers->where('inforce','=',1);
+        return response()->json(['success'=>1,'data'=>$expenditures], 200,[],JSON_NUMERIC_CHECK);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Ledger  $ledger
-     * @return \Illuminate\Http\Response
-     */
     public function show(Ledger $ledger)
     {
         //
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Ledger  $ledger
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Ledger $ledger)
     {
         //
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Ledger  $ledger
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Ledger $ledger)
     {
         //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Ledger  $ledger
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Ledger $ledger)
     {
         //
