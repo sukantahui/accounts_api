@@ -23,6 +23,12 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('asset_id')->unsigned();
             $table->foreign('asset_id')->references('id')->on('assets');
 
+            $table->bigInteger('voucher_id')->unsigned();
+            $table->foreign('voucher_id')->references('id')->on('vouchers');
+
+            $table->string('voucher_number')->nullable(true);
+            $table->string('particulars')->nullable(true);
+
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 

@@ -23,11 +23,16 @@ Route::post('/register', 'AuthController@register');
 
 Route::post('/login', 'AuthController@login');
 Route::get('/me', 'AuthController@me');
+
+
 Route::group(array('prefix' => 'dev'), function() {
     Route::get('/incomeLedgers', 'LedgerController@getIncomes');
     Route::get('/expenditureLedgers', 'LedgerController@getExpenditures');
-
     Route::get('/assets', 'AssetController@index');
+
+    // transaction
+    Route::post('/transactions', 'TransactionController@saveTransaction');
+    Route::get('/incomeTransactions', 'TransactionController@getIncomeTransactions');
 });
 
 
@@ -43,6 +48,9 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('/incomeLedgers', 'LedgerController@getIncomes');
     Route::get('/expenditureLedgers', 'LedgerController@getExpenditures');
     Route::get('/assets', 'AssetController@index');
+
+    Route::get('/incomeTransactions', 'TransactionController@getIncomeTransactions');
+    Route::post('/transactions', 'TransactionController@saveTransaction');
 
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);

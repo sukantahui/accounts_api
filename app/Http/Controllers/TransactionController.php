@@ -7,14 +7,30 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function saveTransaction(Request $request){
+        $input=(object)($request->json()->all());
+
+        $transaction= new Transaction();
+        $transaction->transaction_date = $input->transaction_date;
+        $transaction->ledger_id = $input->ledger_id;
+        $transaction->asset_id = $input->asset_id;
+        $transaction->voucher_number = $input->voucher_number;
+        $transaction->amount = $input->amount;
+        $transaction->voucher_id = $input->voucher_id;
+        $transaction->particulars = $input->particulars;
+        $transaction->user_id = $input->user_id;
+        $transaction->save();
+
+        return response()->json(['success'=>1,'data'=>$transaction], 200,[],JSON_NUMERIC_CHECK);
+    }
+    public function getIncomeTransactions()
     {
-        //
+        $result = Transaction::join('ledgers','transactions.ledger_id','ledgers.id')
+            ->join('assets','transactions.asset_id','assets.id')
+            ->select('transactions.transaction_date','ledgers.ledger_name','assets.assets_name','transactions.amount')
+            ->where('transactions.voucher_id','=',1)
+            ->get();
+        return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
 
     /**
