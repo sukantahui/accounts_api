@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
@@ -21,13 +22,19 @@ class TransactionController extends Controller
         $transaction->user_id = $input->user_id;
         $transaction->save();
 
-        return response()->json(['success'=>1,'data'=>$transaction], 200,[],JSON_NUMERIC_CHECK);
+        $result = Transaction::join('ledgers','transactions.ledger_id','ledgers.id')
+            ->join('assets','transactions.asset_id','assets.id')
+            ->select('transactions.id','transactions.transaction_date',DB::raw("date_format(transaction_date,'%D %M %Y') as formatted_date"),'transactions.ledger_id','ledgers.ledger_name','transactions.asset_id','assets.assets_name','transactions.voucher_number','transactions.voucher_id','transactions.particulars','transactions.user_id','transactions.amount')
+            ->where('transactions.voucher_id','=',1)->where('transactions.id','=',$transaction->id)
+            ->first();
+
+        return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
     public function getIncomeTransactions()
     {
         $result = Transaction::join('ledgers','transactions.ledger_id','ledgers.id')
             ->join('assets','transactions.asset_id','assets.id')
-            ->select('transactions.transaction_date','ledgers.ledger_name','assets.assets_name','transactions.amount')
+            ->select('transactions.id','transactions.transaction_date',DB::raw("date_format(transaction_date,'%D %M %Y') as formatted_date"),'transactions.ledger_id','ledgers.ledger_name','transactions.asset_id','assets.assets_name','transactions.voucher_number','transactions.voucher_id','transactions.particulars','transactions.user_id','transactions.amount')
             ->where('transactions.voucher_id','=',1)
             ->get();
         return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
