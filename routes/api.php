@@ -33,6 +33,9 @@ Route::group(array('prefix' => 'dev'), function() {
     // transaction
     Route::post('/incomeTransactions', 'TransactionController@saveIncomeTransaction');
     Route::get('/incomeTransactions', 'TransactionController@getIncomeTransactions');
+
+    Route::post('/expenditureTransactions', 'TransactionController@saveExpenditureTransaction');
+    Route::get('/expenditureTransactions', 'TransactionController@getExpenditureTransactions');
 });
 
 
