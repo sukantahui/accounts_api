@@ -31,7 +31,7 @@ Route::group(array('prefix' => 'dev'), function() {
     Route::get('/assets', 'AssetController@index');
 
     // transaction
-    Route::post('/transactions', 'TransactionController@saveTransaction');
+    Route::post('/incomeTransactions', 'TransactionController@saveIncomeTransaction');
     Route::get('/incomeTransactions', 'TransactionController@getIncomeTransactions');
 });
 
@@ -50,7 +50,7 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('/assets', 'AssetController@index');
 
     Route::get('/incomeTransactions', 'TransactionController@getIncomeTransactions');
-    Route::post('/transactions', 'TransactionController@saveTransaction');
+    Route::post('/incomeTransactions', 'TransactionController@saveIncomeTransaction');
 
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);

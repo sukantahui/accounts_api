@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
 {
-    public function saveTransaction(Request $request){
+    public function saveIncomeTransaction(Request $request){
         $input=(object)($request->json()->all());
 
         $transaction= new Transaction();
@@ -36,6 +36,7 @@ class TransactionController extends Controller
             ->join('assets','transactions.asset_id','assets.id')
             ->select('transactions.id','transactions.transaction_date',DB::raw("date_format(transaction_date,'%D %M %Y') as formatted_date"),'transactions.ledger_id','ledgers.ledger_name','transactions.asset_id','assets.assets_name','transactions.voucher_number','transactions.voucher_id','transactions.particulars','transactions.user_id','transactions.amount')
             ->where('transactions.voucher_id','=',1)
+            ->orderBy('transactions.transaction_date','DESC')
             ->get();
         return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }

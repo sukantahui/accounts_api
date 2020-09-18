@@ -18,4 +18,28 @@ class Transaction extends Model
     protected $hidden = [
         'created_at', 'updated_at'
     ];
+    /**
+     * @var mixed
+     */
+    private $asset_id;
+    /**
+     * @var mixed
+     */
+    private $voucher_number;
+    /**
+     * @var mixed
+     */
+    private $amount;
+    /**
+     * @var mixed
+     */
+    private $voucher_id;
+    /**
+     * @var mixed
+     */
+    private $particulars;
+    /**
+     * @var mixed
+     */
+    private $user_id;
 }
