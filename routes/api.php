@@ -36,6 +36,8 @@ Route::group(array('prefix' => 'dev'), function() {
 
     Route::post('/expenditureTransactions', 'TransactionController@saveExpenditureTransaction');
     Route::get('/expenditureTransactions', 'TransactionController@getExpenditureTransactions');
+
+    Route::get('/transactionYears', 'TransactionController@get_transaction_years');
 });
 
 
@@ -57,6 +59,8 @@ Route::group(['middleware' => ['jwt.auth']], function() {
 
     Route::post('/expenditureTransactions', 'TransactionController@saveExpenditureTransaction');
     Route::get('/expenditureTransactions', 'TransactionController@getExpenditureTransactions');
+
+    Route::get('/transactionYears', 'TransactionController@get_transaction_years');
 
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);

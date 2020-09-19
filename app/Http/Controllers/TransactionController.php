@@ -150,6 +150,18 @@ class TransactionController extends Controller
         return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
 
+    public function get_transaction_years(){
+        $result = Transaction::select(DB::raw('distinct year(transaction_date) as transaction_year'))->get();
+        foreach ($result as $row){
+            $months = Transaction::select(DB::raw('distinct month(transaction_date) as month_number'),DB::raw("date_format(transaction_date,'%M') as month_name"))
+                        ->where(DB::raw('year(transaction_date)'), '=', $row->transaction_year)
+                        ->orderBy(DB::raw('month(transaction_date)'))
+                        ->get();
+            $row->setAttribute('months',$months);
+        }
+
+        return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
+    }
 
     public function create()
     {
@@ -168,37 +180,5 @@ class TransactionController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Transaction $transaction)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Transaction $transaction)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Transaction $transaction)
-    {
-        //
-    }
 }
