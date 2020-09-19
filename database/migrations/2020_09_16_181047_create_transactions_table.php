@@ -17,6 +17,8 @@ class CreateTransactionsTable extends Migration
             $table->id();
             $table->date('transaction_date')->nullable(false);
 
+            $table->string('transaction_number',20)->nullable(false);
+
             $table->bigInteger('ledger_id')->unsigned();
             $table->foreign('ledger_id')->references('id')->on('ledgers');
 

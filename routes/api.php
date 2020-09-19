@@ -55,6 +55,9 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('/incomeTransactions', 'TransactionController@getIncomeTransactions');
     Route::post('/incomeTransactions', 'TransactionController@saveIncomeTransaction');
 
+    Route::post('/expenditureTransactions', 'TransactionController@saveExpenditureTransaction');
+    Route::get('/expenditureTransactions', 'TransactionController@getExpenditureTransactions');
+
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);
     });
