@@ -39,7 +39,11 @@ Route::group(array('prefix' => 'dev'), function() {
 
     Route::get('/transactionYears', 'TransactionController@get_transaction_years');
 
-    Route::get('/incomeLedgersTotal/{year}', 'TransactionController@get_income_ledgers_group_total');
+    Route::get('/incomeLedgersTotal/{year}', 'TransactionController@get_income_ledgers_group_total_by_year');
+    Route::get('/incomeLedgersTotal/{year}/{month}', 'TransactionController@get_income_ledgers_group_total_by_year_n_month');
+
+    Route::get('/expenditureLedgersTotal/{year}', 'TransactionController@get_expenditure_ledgers_group_total_by_year');
+    Route::get('/expenditureLedgersTotal/{year}/{month}', 'TransactionController@get_expenditure_ledgers_group_total_by_year_n_month');
 });
 
 
@@ -63,6 +67,12 @@ Route::group(['middleware' => ['jwt.auth']], function() {
     Route::get('/expenditureTransactions', 'TransactionController@getExpenditureTransactions');
 
     Route::get('/transactionYears', 'TransactionController@get_transaction_years');
+
+    Route::get('/incomeLedgersTotal/{year}', 'TransactionController@get_income_ledgers_group_total_by_year');
+    Route::get('/incomeLedgersTotal/{year}/{month}', 'TransactionController@get_income_ledgers_group_total_by_year_n_month');
+
+    Route::get('/expenditureLedgersTotal/{year}', 'TransactionController@get_expenditure_ledgers_group_total_by_year');
+    Route::get('/expenditureLedgersTotal/{year}/{month}', 'TransactionController@get_expenditure_ledgers_group_total_by_year_n_month');
 
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);
