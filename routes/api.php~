@@ -39,7 +39,7 @@ Route::group(array('prefix' => 'dev'), function() {
 
     Route::get('/transactionYears', 'TransactionController@get_transaction_years');
 
-    Route::get('/incomeLedgersTotal/{year}', 'TransactionController@get_income_ledgers_group_total');
+    Route::get('/incomeLedgersTotal', 'TransactionController@get_income_ledgers_group_total');
 });
 
 

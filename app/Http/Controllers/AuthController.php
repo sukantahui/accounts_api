@@ -33,8 +33,11 @@ class AuthController extends Controller
         $credentials['password']=$request->password;
 
         $user = User::where('email', '=', $request->email)->first();
+        if($user==null){
+            return response()->json(['success'=>0,'token'=>null,'user'=>null,'message'=>'User does not exist'], 200);
+        }
         if (!Hash::check($request->password, $user->password)) {
-            return response()->json(['success'=>false, 'message' => 'Login Fail, pls check password']);
+            return response()->json(['success'=>0,'token'=>null,'user'=>null,'message'=>'User name or password does not exist'], 200);
         }
 
 
@@ -43,15 +46,7 @@ class AuthController extends Controller
         $tokenObject = $this->respondWithToken($token);
         $tempUser = array('id'=>$user->id,'person_name'=>$user->person_name,'person_type_id'=>$user->person_type_id);
 
-        return response()->json(['token'=>$tokenObject,'user'=>$tempUser], 200);
-
-
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
-        }
-        $currentUser = Auth::user();
-        $tokenObject = $this->respondWithToken($token);
-        return response()->json(['user' => $currentUser, 'token'=>$tokenObject], 200);
+        return response()->json(['success'=>1,'token'=>$tokenObject,'user'=>$tempUser,'message'=>'Welcome'], 200);
 
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\CustomVoucher;
 use App\Model\Transaction;
+use App\Model\voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -163,11 +164,15 @@ class TransactionController extends Controller
         return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
 
-    public function create()
-    {
-        //
+    public function get_income_ledgers_group_total($year){
+        $result = Transaction::join('ledgers','transactions.ledger_id','ledgers.id')
+            ->select('transactions.ledger_id', 'ledgers.ledger_name', DB::raw('sum(transactions.amount) as amount'))
+            ->groupBy('transactions.ledger_id')
+            ->where('transactions.voucher_id','=',1)
+            ->where(DB::raw('year(transactions.transaction_date)'),'=',$year)
+            ->get();
+        return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
-
 
     public function store(Request $request)
     {
