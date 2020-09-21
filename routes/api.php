@@ -44,6 +44,13 @@ Route::group(array('prefix' => 'dev'), function() {
 
     Route::get('/expenditureLedgersTotal/{year}', 'TransactionController@get_expenditure_ledgers_group_total_by_year');
     Route::get('/expenditureLedgersTotal/{year}/{month}', 'TransactionController@get_expenditure_ledgers_group_total_by_year_n_month');
+
+
+    Route::post('/ledgers', 'LedgerController@create');
+
+    Route::get('/cashBook', 'TransactionController@getCashBook');
+
+
 });
 
 
@@ -73,6 +80,8 @@ Route::group(['middleware' => ['jwt.auth']], function() {
 
     Route::get('/expenditureLedgersTotal/{year}', 'TransactionController@get_expenditure_ledgers_group_total_by_year');
     Route::get('/expenditureLedgersTotal/{year}/{month}', 'TransactionController@get_expenditure_ledgers_group_total_by_year_n_month');
+
+    Route::post('/ledgers', 'LedgerController@create');
 
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);

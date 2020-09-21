@@ -24,9 +24,14 @@ class LedgerController extends Controller
         return response()->json(['success'=>1,'data'=>$expenditures], 200,[],JSON_NUMERIC_CHECK);
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $input=(object)($request->json()->all());
+        $ledger= new Ledger();
+        $ledger->ledger_type_id=$input->ledger_type_id;
+        $ledger->ledger_name=$input->ledger_name;
+        $ledger->save();
+        return response()->json(['success'=>1,'data'=>$ledger], 200,[],JSON_NUMERIC_CHECK);
     }
     public function store(Request $request)
     {

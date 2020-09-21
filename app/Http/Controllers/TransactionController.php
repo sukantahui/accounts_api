@@ -204,9 +204,28 @@ class TransactionController extends Controller
         return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
 
-    public function store(Request $request)
+    public function getCashBook()
     {
-        //
+        $b=0;
+        $c=0;
+        $result = Transaction::join('ledgers','transactions.ledger_id','ledgers.id')
+                    ->join('assets','transactions.asset_id','assets.id')
+                    ->join('vouchers','transactions.voucher_id','vouchers.id')
+                    ->join('ledger_types','ledgers.ledger_type_id','ledger_types.id')
+                    ->select(
+                        'transactions.transaction_date',
+                        'transactions.transaction_number',
+                        'transactions.voucher_number',
+                        DB::raw("if(transactions.voucher_id =1 ,ledgers.ledger_name,'') as income"),
+                        DB::raw("if(transactions.voucher_id =2 ,ledgers.ledger_name,'') as expenditure"),
+                        'assets.assets_name',
+                        DB::raw("if(transactions.asset_id =1,transactions.amount,0) as cash"),
+                        DB::raw("if(transactions.asset_id =2,transactions.amount,0) as bank"),
+                        'transactions.voucher_id',
+                        'ledger_types.value',
+                        DB::raw($b.' as test')
+                        )->get();
+        return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
 
 
