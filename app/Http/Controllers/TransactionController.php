@@ -222,9 +222,23 @@ class TransactionController extends Controller
                         DB::raw("if(transactions.asset_id =1,transactions.amount,0) as cash"),
                         DB::raw("if(transactions.asset_id =2,transactions.amount,0) as bank"),
                         'transactions.voucher_id',
-                        'ledger_types.value',
-                        DB::raw($b.' as test')
-                        )->get();
+                        'ledger_types.value'
+                        )
+                    ->orderBy('transactions.transaction_date')
+                    ->get();
+        $bank=0;
+        $cash=0;
+        foreach ($result as $row){
+            if($row->cash > 0){
+                $cash = $bank+(($row->cash)*$row->value);
+            }
+            if($row->bank > 0){
+                $bank = $bank+(($row->bank)*$row->value);
+            }
+
+            $row->setAttribute('bank_balance',$bank);
+            $row->setAttribute('cash_balance',$cash);
+        }
         return response()->json(['success'=>1,'data'=>$result], 200,[],JSON_NUMERIC_CHECK);
     }
 
