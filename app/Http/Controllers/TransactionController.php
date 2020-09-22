@@ -225,12 +225,14 @@ class TransactionController extends Controller
                         'ledger_types.value'
                         )
                     ->orderBy('transactions.transaction_date')
+                    ->orderBy('transactions.voucher_id')
                     ->get();
+
         $bank=0;
         $cash=0;
         foreach ($result as $row){
             if($row->cash > 0){
-                $cash = $bank+(($row->cash)*$row->value);
+                $cash = $cash+(($row->cash)*$row->value);
             }
             if($row->bank > 0){
                 $bank = $bank+(($row->bank)*$row->value);
