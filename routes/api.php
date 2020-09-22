@@ -83,6 +83,8 @@ Route::group(['middleware' => ['jwt.auth']], function() {
 
     Route::post('/ledgers', 'LedgerController@create');
 
+    Route::get('/cashBook', 'TransactionController@getCashBook');
+
     Route::get('test', function(){
         return response()->json(['foo'=>'bar']);
     });

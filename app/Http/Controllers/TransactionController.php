@@ -214,6 +214,7 @@ class TransactionController extends Controller
                     ->join('ledger_types','ledgers.ledger_type_id','ledger_types.id')
                     ->select(
                         'transactions.transaction_date',
+                        DB::raw("date_format(transactions.transaction_date,'%D %M, %Y') as formatted_date"),
                         'transactions.transaction_number',
                         'transactions.voucher_number',
                         DB::raw("if(transactions.voucher_id =1 ,ledgers.ledger_name,'') as income"),
