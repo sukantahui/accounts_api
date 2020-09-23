@@ -48,15 +48,28 @@ class DatabaseSeeder extends Seeder
         //Ledgers
         Ledger::create(['ledger_name'=>'Received from Owner','ledger_type_id'=>1]);
         Ledger::create(['ledger_name'=>'Received LC','ledger_type_id'=>1]);
+        Ledger::create(['ledger_name'=>'Refinish income','ledger_type_id'=>1]);
         Ledger::create(['ledger_name'=>'Misc. Received','ledger_type_id'=>1]);
 
         Ledger::create(['ledger_name'=>'Withdraw by Owner','ledger_type_id'=>2]);
         Ledger::create(['ledger_name'=>'Electricity','ledger_type_id'=>2]);
         Ledger::create(['ledger_name'=>'Municipal Tax','ledger_type_id'=>2]);
-        Ledger::create(['ledger_name'=>'Misc. Expenditure','ledger_type_id'=>2]);
         Ledger::create(['ledger_name'=>'Saraswati Puja Expenditure','ledger_type_id'=>2]);
         Ledger::create(['ledger_name'=>'Biswakarma Puja Expenditure','ledger_type_id'=>2]);
-        Ledger::create(['ledger_name'=>'Others Puja Expenditure','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Daily Puja Expenditure','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Daily Tiffin Expenditure','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Muchi','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Sweeper','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Van Rent','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Car Rent','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'TA for Salesman','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Gas Equipment purchase','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Donation Paid','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Market Expenditure for owner','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Gas Expenditure','ledger_type_id'=>2]);
+        Ledger::create(['ledger_name'=>'Salary paid','ledger_type_id'=>2]);
+
+        Ledger::create(['ledger_name'=>'Misc. Expenditure','ledger_type_id'=>2]);
 
         //Assets
         Asset::create(['assets_name'=>'Cash','opening_balance'=>0]);
