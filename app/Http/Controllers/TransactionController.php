@@ -206,6 +206,7 @@ class TransactionController extends Controller
 
     public function getCashBook()
     {
+
         $b=0;
         $c=0;
         $result = Transaction::join('ledgers','transactions.ledger_id','ledgers.id')
