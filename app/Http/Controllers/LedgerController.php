@@ -20,7 +20,8 @@ class LedgerController extends Controller
     }
     public function getExpenditures()
     {
-        $expenditures=LedgerType::find(2)->ledgers->where('inforce','=',1);
+        $expenditures = Ledger::where('inforce','=',1)->where('ledger_type_id','=',2)->orderBy('ledger_name')->get();
+//        $expenditures=LedgerType::find(2)->ledgers->where('inforce','=',1);
         return response()->json(['success'=>1,'data'=>$expenditures], 200,[],JSON_NUMERIC_CHECK);
     }
 
